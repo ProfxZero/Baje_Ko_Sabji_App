@@ -1,6 +1,6 @@
 <?php
 include("../Includes/db.php");
-//session_start();
+// session_start();
 include("../Functions/functions.php");
 ?>
 
@@ -301,45 +301,70 @@ include("../Functions/functions.php");
 			</div>
 		</div>
 	</main>
-	
+	<script>
+    // JavaScript function for form submission handling
+    function handleSubmit() {
+        var phoneNumber = document.getElementById('phone_number').value;
+        var password = document.getElementById('password').value;
+
+        // Check if phone number and password match admin credentials
+		if ($phonenumber === 'admin' && $password === 'admin') {
+        // Redirect to admin panel
+        header("Location: adminpanel.php");
+        exit(); // Ensure script stops after redirection
+    }
+    }
+</script>
 </body>
 
 </html>
 
 <?php
+include("../Includes/db.php");
+
 if (isset($_POST['login'])) {
-
-	$phonenumber = mysqli_real_escape_string($con, $_POST['phonenumber']);
-	$password = mysqli_real_escape_string($con, $_POST['password']);
-
-	$ciphering = "AES-128-CTR";
-	$iv_length = openssl_cipher_iv_length($ciphering);
-	$options = 0;
-	$encryption_iv = '2345678910111211';
-	$encryption_key = "DE";
-	$encryption = openssl_encrypt(
-		$password,
-		$ciphering,
-		$encryption_key,
-		$options,
-		$encryption_iv
-	);
-	// echo $encryption;
-
-	$query = "select * from farmerregistration where farmer_phone = '$phonenumber' and farmer_password = '$encryption'";
-	echo $query;
-	$run_query = mysqli_query($con, $query);
-	$count_rows = mysqli_num_rows($run_query);
-	if ($count_rows == 0) {
-		echo "<script>alert('Please Enter Valid Details');</script>";
-		echo "<script>window.open('FarmerLogin.php','_self')</script>";
-	}
-	while ($row = mysqli_fetch_array($run_query)) {
-		$id = $row['farmer_id'];
-	}
-
-	$_SESSION['phonenumber'] = $phonenumber;
-	echo "<script>window.open('../FarmerPortal/farmerHomepage.php','_self')</script>";
+    $phonenumber = mysqli_real_escape_string($con, $_POST['phonenumber']);
+    $password = mysqli_real_escape_string($con, $_POST['password']);
+    
+	if ($phonenumber === 'admin' && $password === 'admin') {
+        // Redirect to admin panel
+        echo "<script>window.open('../auth/adminpanel.php','_self')</script>";
+        exit(); // Ensure script stops after redirection
+    }
+    
+    // Encrypt the password for comparison
+    $ciphering = "AES-128-CTR";
+    $iv_length = openssl_cipher_iv_length($ciphering);
+    $options = 0;
+    $encryption_iv = '2345678910111211';
+    $encryption_key = "DE";
+    $encryption = openssl_encrypt(
+        $password,
+        $ciphering,
+        $encryption_key,
+        $options,
+        $encryption_iv
+    );
+    
+    // Check farmer credentials
+    $query = "SELECT * FROM farmerregistration WHERE farmer_phone = '$phonenumber' AND farmer_password = '$encryption'";
+    $run_query = mysqli_query($con, $query);
+    $count_rows = mysqli_num_rows($run_query);
+    
+    if ($count_rows == 0) {
+        echo "<script>alert('Please Enter Valid Details');</script>";
+        echo "<script>window.open('FarmerLogin.php','_self')</script>";
+    } else {
+        // Fetch user ID or any other necessary data
+        $row = mysqli_fetch_array($run_query);
+        $id = $row['farmer_id'];
+        
+        // Store phone number in session
+        $_SESSION['phonenumber'] = $phonenumber;
+        
+        // Redirect to farmer homepage
+        echo "<script>window.open('../FarmerPortal/farmerHomepage.php','_self')</script>";
+        exit();
+    }
 }
-
 ?>
