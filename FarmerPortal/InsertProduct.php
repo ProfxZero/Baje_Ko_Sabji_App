@@ -56,6 +56,18 @@ $sessphonenumber = $_SESSION['phonenumber'];
             margin-right: 0;
         }
     </style>
+    <script>
+    function validateForm() {
+        var productStock = document.forms["my-form"]["product_stock"].value;
+        var productPrice = document.forms["my-form"]["product_price"].value;
+
+        if (!Number.isInteger(parseFloat(productStock)) || !Number.isInteger(parseFloat(productPrice))) {
+            alert("Please enter valid integer values for Product Stock and Product MRP.");
+            return false;
+        }
+        return true;
+    }
+</script>
 </head>
 
 <body>
@@ -70,7 +82,8 @@ $sessphonenumber = $_SESSION['phonenumber'];
                             </div>
                             <div class="card-body">
 
-                                <form name="my-form" action="InsertProduct.php" method="post" enctype="multipart/form-data">
+                            <form name="my-form" action="InsertProduct.php" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+
 
                                     <div class="form-group row">
                                         <label for="full_name" class="col-md-4 col-form-label text-md-right text-center font-weight-bolder">Product Title:</label>
@@ -166,6 +179,8 @@ $sessphonenumber = $_SESSION['phonenumber'];
                                         <button type="submit" class="btn btn-primary" name="insert_pro">
                                             INSERT
                                         </button>
+                                        <button type="button" class="btn btn-secondary" onclick="window.location.href='MyProducts.php'">Back</button>
+
                                     </div>
                                 </form>
                             </div>
@@ -208,9 +223,9 @@ if (isset($_POST['insert_pro'])) {    // when button is clicked
         $run = mysqli_query($con, $getting_id);
         $row = mysqli_fetch_array($run);
         $id = $row['farmer_id'];
-        $insert_product = "insert into products (farmer_fk,product_title, product_cat,
+        $insert_product = "insert into products (farmer_fk,product_title, product_cat, 
                                 product_type,product_expiry,product_image, product_stock, product_price,
-                                product_desc,  product_keywords, product_delivery)
+                                product_desc,  product_keywords, product_delivery) 
                                 values ('$id','$product_title','$product_cat','$product_type','$product_expiry','$product_image','$product_stock',
                                         '$product_price','$product_desc',
                                         '$product_keywords','$product_delivery')";
