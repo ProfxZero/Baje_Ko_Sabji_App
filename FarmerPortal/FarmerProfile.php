@@ -1,17 +1,27 @@
 <?php
 include("../Includes/db.php");
 session_start();
-$sessphonenumber = $_SESSION['phonenumber'];
-$sql = "select * from farmerregistration where farmer_phone = '$sessphonenumber' ";
-$run_query = mysqli_query($con, $sql);
-while ($row = mysqli_fetch_array($run_query)) {
-    $name = $row['farmer_name'];
-    $phone = $row['farmer_phone'];
-    $address = $row['farmer_address'];
-    $pan = $row['farmer_pan'];
-    // $bank = $row['farmer_bank'];
-    $state = $row['farmer_state'];
-    $district = $row['farmer_district'];
+$sessphonenumber = isset($_SESSION['farmer_phone']) ? $_SESSION['farmer_phone'] : null;
+if ($sessphonenumber) {
+    $sql = "SELECT * FROM farmerregistration WHERE farmer_phone = '$sessphonenumber'";
+    $run_query = mysqli_query($con, $sql);
+
+    if ($run_query && mysqli_num_rows($run_query) > 0) {
+        $row = mysqli_fetch_array($run_query);
+        $name = $row['farmer_name'];
+        $phone = $row['farmer_phone'];
+        $address = $row['farmer_address'];
+        $pan = $row['farmer_pan'];
+        $state = $row['farmer_state'];
+        $district = $row['farmer_district'];
+    } else {
+        // If no results, initialize variables to empty strings
+        $name = $phone = $address = $pan = $state = $district = "";
+    }
+} else {
+    // If session variable is not set, redirect to login page or initialize variables
+    // header("Location: login.php"); // Uncomment to redirect
+    $name = $phone = $address = $pan = $state = $district = "";
 }
 ?>
 
@@ -185,16 +195,12 @@ while ($row = mysqli_fetch_array($run_query)) {
                     <td><label><b>Pan Number :</b></label></td>
                     <td><textarea rows="2" column="10" disabled> <?php echo $pan ?> </textarea><br></td>
                 </tr>
-                <tr align="center">
-                    <td><label><b>Account Number :</b></label></td>
-                    <td><textarea rows="2" column="10" disabled> <?php echo $bank ?> </textarea><br></td>
-                </tr>
 
-                <td colspan=2><input type="submit" name="editProf" value="Edit Profile"></td>
+                <td colspan=2><input type="submit" name="editProf" value="Edit Profile">
+            </td>
                 </tr>
             </table>
-
-
+            <button type="button" class="btn btn-secondary" onclick="window.location.href='farmerhomepage.php'">Back</button>
 
         </form>
 
