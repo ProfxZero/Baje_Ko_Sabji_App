@@ -1,4 +1,4 @@
- <?php
+<?php
      include("../Functions/functions.php");
      ?>
 
@@ -869,14 +869,14 @@
                      </div>
                      <!-- <div class="p-2 ml-5"><i class='far fa-user-circle' style='font-size:30px; color: green;'></i></div> -->
                      <a class="float-left" href="#">
-                          <img src="agro.png" class="float-left mr-5 ml-0 " alt="Logo" style="height:50px;">
+                          <img src="baje.png" class="float-left mr-5 ml-0 " alt="Logo" style="height:50px;">
                      </a>
                 </div>
                 <button class="navbar-toggler" data-toggle="collapse" style="margin-left:-20px;" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                      <span class="navbar-toggler-icon"><i class="fas fa-bars p-1 " style="color:green;font-size:20px; "></i></span>
                 </button>
                 <a class="float-left" href="farmerHomepage.php">
-                     <img src="agro.png" class="float-left mr-2 moblogo" alt="Logo" style="height:50px;">
+                     <img src="baje.png" class="float-left mr-2 moblogo" alt="Logo" style="height:50px;">
                 </a>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
@@ -898,7 +898,7 @@
 
                                    echo "<a href='FarmerProfile.php' class='list-group-item list-group-item-action ' style='background-color:#292b2c;text-align:center;color:goldenrod'>Profile</a>";
                                    echo "<a href='Transactions.php' class='list-group-item list-group-item-action' style='background-color:#292b2c;text-align:center;color:goldenrod'>Orders</a>";
-                                   echo "<a href='logout.php' class='list-group-item list-group-item-action ' style='background-color:#292b2c;text-align:center;color:goldenrod'>Logout</a>";
+                                   echo "<a href='../index.html' class='list-group-item list-group-item-action ' style='background-color:#292b2c;text-align:center;color:goldenrod'>Logout</a>";
                               } else {
                                    echo "<a href='../auth/FarmerLogin.php'> <div class='text-success  logins '>Login</div></a>";
                               }
@@ -931,7 +931,7 @@
                                    if (isset($_SESSION['phonenumber'])) {
                                         echo "<a href='FarmerProfile.php' class='dropdown-item' style='padding-right:-20px;'>Profile</a>";
                                         echo "<a href='Transactions.php' class='dropdown-item' style='padding-right:-20px;'>Orders</a>";
-                                        echo "<a href='logout.php' class='dropdown-item' style='padding-right:-20px;'>Logout</a>";
+                                        echo "<a href='../index.html' class='dropdown-item' style='padding-right:-20px;'>Logout</a>";
                                    } else {
                                         echo "<a href='../auth/FarmerLogin.php'> <div class='dropdown-item' style='padding-right:-20px;'>Login</div></a>";
                                    }
@@ -972,7 +972,6 @@
 
                      </div>
                      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                           <span class="sr-only">Previous</span>
                      </a>
                      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
@@ -1044,8 +1043,8 @@
                      </div>
                      <div class="row">
                           <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center">
-                               <p><u><a href="https://www.agrocraft.com/">AgroCraft Corporation</a></u> is a Multitrading Company for farmers ang traders</p>
-                               <p class="h6">Copy All right Reversed.<a class="text-green ml-2" href="https://www.google.com" target="_blank">Agrotech</a></p>
+                               <p><u><a href="https://www.Bajekosabji.com/">Bajekosabji Corporation</a></u> is a Multitrading Company for farmers ang traders</p>
+                               <p class="h6">Copy All right Reversed.<a class="text-green ml-2" href="https://www.google.com" target="_blank">Baje Ko Sabji</a></p>
                           </div>
                           </hr>
                      </div>
