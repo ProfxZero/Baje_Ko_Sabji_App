@@ -10,6 +10,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="../portal_files/bootstrap.min.css">
     <script>
+        function validateForm() {
+            var phoneNumber = document.getElementById('phone_number').value;
+            if (isNaN(phoneNumber)) {
+                alert("Please enter a valid phone number.");
+                return false;
+            }
+            return true;
+        }
         function state() {
             var a = document.getElementById('states').value;
             if (a === 'Kathmandu') {
@@ -247,7 +255,7 @@
 					<div class="card">
 						<div class="card-header" style="background-color:#292b2c"><h4 style="font-style:bold;color:goldenrod">Farmer Registration<h4></div>
 						<div class="card-body border border-dark">
-							<form name="my-form" action="FarmerRegister.php" method="post">
+                        <form name="my-form" action="FarmerRegister.php" method="post" onsubmit="return validateForm()">
 								<div class="form-group row">
 									<label for="full_name" class="col-md-4 col-form-label text-md-right"><i class="fas fa-user mr-2"></i><b>Full Name</b></label>
 									<div class="col-md-6">
@@ -296,12 +304,12 @@
 									</div>
 								</div>
 
-                                <div class="form-group row">
+                                <!-- <div class="form-group row">
 									<label for="account1" class="col-md-4 col-form-label text-md-right"><i class="fas fa-university mr-2"></i><b>Bank Account No.</b></label>
 									<div class="col-md-6">
 										<input type="text" id="account1" class="form-control border border-dark" name="account" placeholder="Bank Account number" required>
 									</div>
-								</div>
+								</div> -->
 
 
 								<div class="form-group row">
@@ -322,6 +330,8 @@
 									<button type="submit" class="btn btn-primary " style="background-color:#292b2c;color:goldenrod"   name="register" value="Register">
 										Register
 									</button>
+                                    <button type="button" class="btn btn-secondary" onclick="window.location.href='../index.html'">Back</button>
+
 								</div>
 							</form>
 						</div>
@@ -350,7 +360,7 @@ if (isset($_POST['register'])) {
     $name = mysqli_real_escape_string($con, $_POST['name']);
     $phonenumber = mysqli_real_escape_string($con, $_POST['phonenumber']);
     $address = mysqli_real_escape_string($con, $_POST['address']);
-    $account = mysqli_real_escape_string($con, $_POST['account']);
+    // $account = mysqli_real_escape_string($con, $_POST['account']);
     $pan = mysqli_real_escape_string($con, $_POST['pan']);
     $password = mysqli_real_escape_string($con, $_POST['password']);
     $confirmpassword = mysqli_real_escape_string($con, $_POST['confirmpassword']);
@@ -370,9 +380,9 @@ if (isset($_POST['register'])) {
 
         $query = "insert into farmerregistration (farmer_name,farmer_phone,
                 farmer_address, farmer_state, farmer_district,
-                farmer_pan,farmer_bank,farmer_password) 
+                farmer_pan,farmer_password) 
                 values ('$name','$phonenumber','$address',
-                '$state','$district','$pan','$account',
+                '$state','$district','$pan',
                 '$encryption')";
 
         $run_register_query = mysqli_query($con, $query);
@@ -380,7 +390,7 @@ if (isset($_POST['register'])) {
         echo "<script>window.open('FarmerLogin.php','_self')</script>";
     } else if (strcmp($password, $confirmpassword) != 0) {
         echo "<script>
-				alert('Password and Confirm Password Should be same');
+				alert('Password and Conform Password Didnt match');
 			</script>";
     }
 }

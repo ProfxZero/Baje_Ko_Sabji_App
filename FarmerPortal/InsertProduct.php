@@ -208,9 +208,9 @@ if (isset($_POST['insert_pro'])) {    // when button is clicked
         $run = mysqli_query($con, $getting_id);
         $row = mysqli_fetch_array($run);
         $id = $row['farmer_id'];
-        $insert_product = "insert into products (farmer_fk,product_title, product_cat, 
+        $insert_product = "insert into products (farmer_fk,product_title, product_cat,
                                 product_type,product_expiry,product_image, product_stock, product_price,
-                                product_desc,  product_keywords, product_delivery) 
+                                product_desc,  product_keywords, product_delivery)
                                 values ('$id','$product_title','$product_cat','$product_type','$product_expiry','$product_image','$product_stock',
                                         '$product_price','$product_desc',
                                         '$product_keywords','$product_delivery')";
