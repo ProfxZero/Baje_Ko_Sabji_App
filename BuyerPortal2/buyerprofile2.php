@@ -10,10 +10,9 @@
         $phone = $row['buyer_phone'];
         $address = $row['buyer_addr'];
         $pan = $row['buyer_pan'];
-        $bank = $row['buyer_bank'];
-
-        $comp = $row['buyer_comp'];
-        $license = $row['buyer_license'];
+        // $bank = $row['buyer_bank'];
+        // $comp = $row['buyer_comp'];
+        // $license = $row['buyer_license'];
         $mail = $row['buyer_mail'];
         $user = $row['buyer_username'];
     }   
@@ -397,6 +396,7 @@
         min-width: 150px !important;
         display: inline-block !important
     }
+    
     }
 </style>
 
@@ -467,11 +467,13 @@
                     <span class="input-group-text text  " id="inputGroup-sizing-default" ><i class="far fa-envelope mr-2"></i>Email id </span>
                 </div>
                 <input type="text" readonly class="form-control-plaintext border border-dark" id="staticEmail" value="<?php echo $mail?> ">
+                
             </div> 
         </div>
         <button type="button" class="btn text-center d-flex mx-auto btn-lg" style="background-color:#292b2c;color:goldenrod">Edit Profile</button>
+        <button type="button" class="btn btn-secondary" onclick="window.location.href='bhome.php'">Back</button>
     </div>
-
+    
     
 </body>
 
